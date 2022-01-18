@@ -76,4 +76,9 @@ spellcheck: ## run cspell
 		--show-context
 
 test: ## run tests
+	# @poetry run pytest \
+	#	--cov runway \
+	#	--cov-report term-missing:skip-covered \
+	#	--dist loadfile \
+	#	--numprocesses auto
 	@echo "Success!"

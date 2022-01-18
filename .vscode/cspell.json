@@ -48,6 +48,7 @@
         "frontmatter",
         "fstring",
         "howto",
+        "isort",
         "kwarg",
         "labelmaker",
         "maint",
