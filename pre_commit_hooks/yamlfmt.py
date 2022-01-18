@@ -7,7 +7,7 @@ import locale
 import sys
 from dataclasses import asdict, dataclass, field
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, List, Literal, NoReturn
+from typing import TYPE_CHECKING, Any, List, NoReturn
 
 from ruamel.yaml import YAML
 
@@ -36,11 +36,6 @@ class Args:
     preserve_quotes: bool = DEFAULT_PRESERVE_QUOTES
     sequence: int = DEFAULT_INDENT_SEQUENCE
     width: int = DEFAULT_WIDTH
-
-
-def bool_action(default: bool) -> Literal["store_false", "store_true"]:
-    """Argparse bool action based on default value."""
-    return "store_false" if default else "store_true"
 
 
 class Cli:
@@ -75,9 +70,18 @@ class Cli:
             help="number of spaces to offset the dash from sequences",
         )
         parser.add_argument(
-            "-c",
             "--colons",
-            action=bool_action(DEFAULT_COLONS),
+            action="store_const",
+            const=True,
+            default=DEFAULT_COLONS,
+            dest="preserve_quotes",
+            help="whether to align top-level colons",
+        )
+        parser.add_argument(
+            "--no-colons",
+            action="store_const",
+            const=False,
+            dest="preserve_quotes",
             help="whether to align top-level colons",
         )
         parser.add_argument(
@@ -88,15 +92,33 @@ class Cli:
             help="maximum line width",
         )
         parser.add_argument(
-            "-p",
             "--preserve-quotes",
-            action=bool_action(DEFAULT_PRESERVE_QUOTES),
+            action="store_const",
+            const=True,
+            default=DEFAULT_PRESERVE_QUOTES,
+            dest="preserve_quotes",
             help="whether to keep existing string quoting",
         )
         parser.add_argument(
-            "-e",
-            "--implicit_start",
-            action=bool_action(DEFAULT_IMPLICIT_START),
+            "--no-preserve-quotes",
+            action="store_const",
+            const=False,
+            dest="preserve_quotes",
+            help="whether to keep existing string quoting",
+        )
+        parser.add_argument(
+            "--implicit-start",
+            action="store_const",
+            const=True,
+            default=DEFAULT_IMPLICIT_START,
+            dest="implicit_start",
+            help="whether to remove the explicit document start",
+        )
+        parser.add_argument(
+            "--no-implicit-start",
+            action="store_const",
+            const=False,
+            dest="implicit_start",
             help="whether to remove the explicit document start",
         )
         parser.add_argument(
@@ -135,7 +157,7 @@ class Formatter:
             offset=offset,
         )
         yaml.top_level_colon_align = colons
-        yaml.explicit_start = implicit_start
+        yaml.explicit_start = not implicit_start
         yaml.width = width
         yaml.preserve_quotes = preserve_quotes
 

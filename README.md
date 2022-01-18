@@ -6,6 +6,16 @@ This hook formats the indentation of YAML files and optionally aligns top-level 
 
 It uses [ruamel.yaml](https://yaml.readthedocs.io/en/latest/) to do the heavy lifting and preserve comments within YAML files.
 
+## Arguments
+
+- `--colons/--no-colons`: Whether to align top-level colons. _(default: `--no-colons`)_
+- `--implicit-start/--no-implicit-start`: Whether to remove explicit document start. _(default: `--implicit-start`)_
+- `-m, --mapping`: Number of space io indent mappings. _(default: `--mappings 4`)_
+- `-o, --offset`: Number of space to offset the dash (`-`) from sequences. _(default: `--offset 4`)_
+- `--preserve-quotes/--no-preserve-quotes`: Whether to keep existing string quotes. _(default: `--no-preserve-quotes`)_
+- `-s, --sequence`: Number of space to indent sequences. _(default: `--sequence 6`)_
+- `-w, --width`: Maximum line width. _(default: `--width 150`)_
+
 ## How-to
 
 ### Configure pre-commit
@@ -18,18 +28,10 @@ Add to `.pre-commit-config.yaml` in your git repo:
 - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
   rev: 0.0.11  # or specific tag
   hooks:
-      - id: yamlfmt
+    - id: yamlfmt
 ```
 
 :bulb: If a pre-commit hook changes a file, the hook fails with a warning that files were changed.
-
-The default settings are:
-
-- `mapping`: 4 spaces
-- `sequence`: 6 spaces
-- `offset`: 4 spaces
-- `colons`: do _not_ align top-level colons
-- `width`: None (use ruamel default)
 
 Given this input:
 
@@ -45,9 +47,9 @@ The default settings result in this output:
 ```yaml
 ---
 foo:
-    bar:
-        - baz1
-        - baz2
+  bar:
+    - baz1
+    - baz2
 ```
 
 #### Combine with `yamllint`
@@ -58,13 +60,13 @@ foo:
 - repo: https://github.com/adrienverge/yamllint.git
   rev: v1.21.0  # or higher tag
   hooks:
-      - id: yamllint
-        args: [--format, parsable, --strict]
+    - id: yamllint
+      args: [--format, parsable, --strict]
 
 - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
   rev: 0.0.11  # or specific tag
   hooks:
-      - id: yamlfmt
+    - id: yamlfmt
 ```
 
 #### Override defaults
@@ -75,8 +77,8 @@ Add to `.pre-commit-config.yaml` in your git repo:
 - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
   rev: 0.0.11  # or specific tag
   hooks:
-      - id: yamlfmt
-        args: [--mapping, '2', --sequence, '2', --offset, '0', --colons, --width, '150']
+    - id: yamlfmt
+      args: [--mapping, '2', --sequence, '2', --offset, '0', --colons, --width, '150']
 ```
 
 ### Invoke pre-commit
