@@ -12,7 +12,7 @@ It uses [ruamel.yaml](https://yaml.readthedocs.io/en/latest/) to do the heavy li
 - `--implicit-start/--no-implicit-start`: Whether to remove explicit document start. _(default: `--implicit-start`)_
 - `-m, --mapping`: Number of space io indent mappings. _(default: `--mappings 4`)_
 - `-o, --offset`: Number of space to offset the dash (`-`) from sequences. _(default: `--offset 4`)_
-- `--preserve-quotes/--no-preserve-quotes`: Whether to keep existing string quotes. _(default: `--no-preserve-quotes`)_
+- `--preserve-quotes/--no-preserve-quotes`: Whether to keep existing string quotes. _(default: `--preserve-quotes`)_
 - `-s, --sequence`: Number of space to indent sequences. _(default: `--sequence 6`)_
 - `-w, --width`: Maximum line width. _(default: `--width 150`)_
 
