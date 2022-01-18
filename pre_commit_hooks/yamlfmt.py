@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import locale
 import sys
 from dataclasses import asdict, dataclass, field
 from functools import cached_property
@@ -151,6 +150,7 @@ class Formatter:
     ) -> None:
         """Instantiate class."""
         yaml = YAML()
+        yaml.allow_unicode = True
         yaml.indent(
             mapping=mapping,
             sequence=sequence,
@@ -174,9 +174,7 @@ class Formatter:
     def parse_file(self, path: StrPath) -> None:
         """Read the file."""
         try:
-            with open(
-                path, "r", encoding=locale.getpreferredencoding(do_setlocale=False)
-            ) as stream:
+            with open(path, "r", encoding="utf-8") as stream:
                 self.content = list(self.yaml.load_all(stream))  # type: ignore
         except IOError:
             self.fail(f"Unable to read {path}")
@@ -184,9 +182,7 @@ class Formatter:
     def write_file(self, path: StrPath) -> None:
         """Write the file."""
         try:
-            with open(
-                path, "w", encoding=locale.getpreferredencoding(do_setlocale=False)
-            ) as stream:
+            with open(path, "w", encoding="utf-8") as stream:
                 self.yaml.dump_all(self.content, stream)
         except IOError:
             self.fail(f"Unable to write {path}")
