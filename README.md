@@ -1,5 +1,7 @@
 # YAML formatter for pre-commit git hooks
 
+> This repo is a fork of [jumanjihouse/pre-commit-hook-yamlfmt](https://github.com/jumanjihouse/pre-commit-hook-yamlfmt).
+
 YAML formatter for [pre-commit](http://pre-commit.com).
 
 This hook formats the indentation of YAML files and optionally aligns top-level colons.
@@ -25,8 +27,8 @@ It uses [ruamel.yaml](https://yaml.readthedocs.io/en/latest/) to do the heavy li
 Add to `.pre-commit-config.yaml` in your git repo:
 
 ```yaml
-- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.0.11  # or specific tag
+- repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
+  rev: v0.2.0  # or specific tag
   hooks:
     - id: yamlfmt
 ```
@@ -63,8 +65,8 @@ foo:
     - id: yamllint
       args: [--format, parsable, --strict]
 
-- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.0.11  # or specific tag
+- repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
+  rev: v0.2.0  # or specific tag
   hooks:
     - id: yamlfmt
 ```
@@ -74,8 +76,8 @@ foo:
 Add to `.pre-commit-config.yaml` in your git repo:
 
 ```yaml
-- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.0.11  # or specific tag
+- repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
+  rev: v0.2.0  # or specific tag
   hooks:
     - id: yamlfmt
       args: [--mapping, '2', --sequence, '2', --offset, '0', --colons, --width, '150']

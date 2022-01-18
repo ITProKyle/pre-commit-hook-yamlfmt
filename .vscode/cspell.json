@@ -49,6 +49,7 @@
         "fstring",
         "howto",
         "isort",
+        "jumanjihouse",
         "kwarg",
         "labelmaker",
         "loadfile",
