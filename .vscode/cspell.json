@@ -1,0 +1,73 @@
+{
+    "ignorePaths": [
+        "**/*.egg-info/**",
+        "**/*.css",
+        "**/*.js",
+        "**/*.pyc",
+        "**/*.ts",
+        "**/.runway/**",
+        "**/.serverless/**",
+        "**/.terraform/**",
+        "**/.venv/**",
+        "**/Pipfile.lock",
+        "**/__pycache__/**",
+        "**/_gitignore",
+        "**/angular.json",
+        "**/build/**",
+        "**/dist/**",
+        "**/dot_gitignore",
+        "**/node_modules/**",
+        "**/package-lock.json",
+        "**/package.json",
+        "**/poetry.lock",
+        "**/requirements.txt",
+        "**/tsconfig.json",
+        ".vscode/dictionaries/*.txt",
+        "typings/**"
+    ],
+    "language": "en",
+    "languageSettings": [
+        {
+            "allowCompoundWords": true,
+            "dictionaries": [
+                "python"
+            ],
+            "languageId": "toml"
+        }
+    ],
+    "maxNumberOfProblems": 100,
+    "version": "0.2",
+    "words": [
+        "asdict",
+        "autofix",
+        "boto",
+        "direnv",
+        "docstrings",
+        "favicon",
+        "fgrep",
+        "frontmatter",
+        "fstring",
+        "howto",
+        "kwarg",
+        "labelmaker",
+        "maint",
+        "mdformat",
+        "noqa",
+        "overlining",
+        "printf",
+        "pydoc",
+        "pyenv",
+        "pygment",
+        "pyright",
+        "recommonmark",
+        "repos",
+        "ruamel",
+        "subclassing",
+        "ungrouped",
+        "venv",
+        "virtualenvs",
+        "winget",
+        "xargs",
+        "yamlfmt"
+    ]
+}

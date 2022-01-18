@@ -1,0 +1,170 @@
+[tool.poetry]
+name = "pre-commit-hook-yamlfmt"
+version = "0.1.0"
+description = "YAML formatter for http://pre-commit.com"
+license = "Apache-2.0"
+authors = ["Kyle Finley <kyle@finley.sh>"]
+readme = "README.md"
+homepage = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
+repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
+keywords = ["pre-commit"]
+packages = [
+  { include = "pre_commit_hooks" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+"ruamel.yaml" = "^0.17.20"
+
+[tool.poetry.dev-dependencies]
+black = "^21.12b0"
+flake8 = "^4.0.1"
+flake8-bugbear = "^22.1.11"  # flake8 plugin
+flake8-comprehensions = "^3.8.0"  # flake8 plugin
+flake8-docstrings = "^1.6.0"  # flake8 plugin
+flake8-use-fstring = "^1.3"  # flake8 plugin
+isort = "^5.10.1"
+pep8-naming = "^0.12.1"  # flake8 plugin
+pre-commit = "^2.16.0"
+pydocstyle = "^6.1.1"  # flake8 plugin
+pylint = "^2.12.2"
+
+[tool.poetry.scripts]
+yamlfmt = "pre_commit_hooks.yamlfmt:main"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.7"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+force-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | build
+  | dist
+)/
+'''
+include = '\.pyi?$'
+line-length = 88
+target-version = ["py38", "py39"]
+
+
+[tool.isort]
+profile = "black"
+skip = [
+  ".eggs",
+  ".git",
+  ".runway",
+  ".serverless",
+  ".venv",
+  "_build",
+  "build",
+  "dist",
+  "node_modules",
+]
+
+
+[tool.pylint.basic]
+good-names = [
+  "_",
+  "a",
+  "b",
+  "ca",
+  "ci",
+  "db",
+  "f",
+  "fn",
+  "i",
+  "id",
+  "j",
+  "k",
+  "ok",
+  "s3",
+  "ui",
+  "up",
+  "v",
+]
+
+[tool.pylint.classes]
+defining-attr-methods = ["__init__", "__new__"]
+
+[tool.pylint.design]
+max-args = 50
+max-attributes = 50
+max-bool-expr = 5
+max-branches = 20
+max-locals = 25
+max-parents = 10
+max-public-methods = 30
+max-returns = 6
+max-statements = 50
+min-public-methods = 0
+
+[tool.pylint.format]
+max-line-length = 100
+max-module-lines = 1000
+
+[tool.pylint.imports]
+allow-wildcard-with-all = "no"
+
+[tool.pylint.logging]
+logging-format-style = "old"
+
+[tool.pylint.master]
+jobs = 0
+
+[tool.pylint.message_control]
+disable = [
+  "line-too-long",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "missing-module-docstring",
+  "similarities",
+  "ungrouped-imports",
+]
+
+[tool.pylint.miscellaneous]
+notes = [
+  "FIXME",
+]
+
+[tool.pylint.reports]
+msg-template = "{path}:{line}:{column}: {msg_id}: {msg} ({symbol})"
+output-format = "colorized"
+score = "yes"
+
+
+[tool.pyright]
+exclude = [
+  "**/__pycache__",
+  "**/.eggs",
+  "**/.git",
+  "**/.runway",
+  "**/.venv",
+  "**/docs",
+  "**/node_modules",
+  "**/typings",
+]
+pythonVersion = "3.8"
+reportDuplicateImport = "none"
+reportImportCycles = "none"
+reportIncompatibleMethodOverride = "warning"
+reportMissingTypeStubs = "warning"
+reportPrivateUsage = "none"
+reportUnknownMemberType = "none"
+reportUnnecessaryIsInstance = "warning"
+reportUnusedImport = "none"
+reportUnusedVariable = "none"
+reportWildcardImportFromLibrary = "none"
+strictParameterNoneValue = false
+typeCheckingMode = "strict"
+useLibraryCodeForTypes = true
+venv = ".venv"

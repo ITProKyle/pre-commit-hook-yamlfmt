@@ -1,0 +1,24 @@
+{
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ITProKyle/pre-commit-hook-yamlfmt/issues"
+  },
+  "description": "YAML formatter for [pre-commit](http://pre-commit.com).",
+  "devDependencies": {
+    "cspell": "^5.15.2",
+    "pyright": "^1.1.211"
+  },
+  "homepage": "https://github.com/ITProKyle/pre-commit-hook-yamlfmt#readme",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "pre-commit-hook-yamlfmt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITProKyle/pre-commit-hook-yamlfmt.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

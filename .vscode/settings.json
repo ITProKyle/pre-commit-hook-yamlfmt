@@ -1,0 +1,30 @@
+{
+    "[python]": {
+        "editor.rulers": [
+            79,
+            100,
+            120
+        ],
+        "editor.tabSize": 4
+    },
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+        79,
+        100,
+        120
+    ],
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.pylintArgs": [
+        "--rcfile=pyproject.toml"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.pythonPath": "${workspaceFolder}/.venv/",
+    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
+    "restructuredtext.linter.extraArgs": [
+        "--ignore D001"
+    ]
+}
