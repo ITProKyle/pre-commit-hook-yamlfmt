@@ -46,7 +46,7 @@ repos:
           - ./
           - ruamel.yaml
         exclude: .pre-commit-hooks.yaml
-        args: [--implicit_start, --mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
+        args: [--mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
   - repo: https://github.com/timothycrosley/isort
     rev: 5.9.3
     hooks:
