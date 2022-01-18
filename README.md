@@ -6,22 +6,6 @@ This hook formats the indentation of YAML files and optionally aligns top-level 
 
 It uses [ruamel.yaml](https://yaml.readthedocs.io/en/latest/) to do the heavy lifting and preserve comments within YAML files.
 
-<!--TOC-->
-
-- [How-to](#how-to)
-  - [Configure pre-commit](#configure-pre-commit)
-    - [Use defaults](#use-defaults)
-    - [Combine with `yamllint`](#combine-with-yamllint)
-    - [Override defaults](#override-defaults)
-  - [Invoke pre-commit](#invoke-pre-commit)
-    - [On every commit](#on-every-commit)
-    - [On demand](#on-demand)
-- [Contributing](#contributing)
-- [Testing](#testing)
-- [License](#license)
-
-<!--TOC-->
-
 ## How-to
 
 ### Configure pre-commit
@@ -37,8 +21,7 @@ Add to `.pre-commit-config.yaml` in your git repo:
       - id: yamlfmt
 ```
 
-:bulb: If a pre-commit hook changes a file,
-the hook fails with a warning that files were changed.
+:bulb: If a pre-commit hook changes a file, the hook fails with a warning that files were changed.
 
 The default settings are:
 
@@ -69,8 +52,7 @@ foo:
 
 #### Combine with `yamllint`
 
-`yamlfmt` only works with valid YAML files, so
-I recommend to use `yamllint` and `yamlfmt` together.
+`yamlfmt` only works with valid YAML files, so I recommend to use `yamllint` and `yamlfmt` together.
 
 ```yaml
 - repo: https://github.com/adrienverge/yamllint.git
@@ -116,17 +98,3 @@ If you want to run the checks on-demand (outside of git hooks), run:
 # Run on-demand.
 pre-commit run --all-files
 ```
-
-The [test harness](TESTING.md) of this git repo uses this approach.
-
-## Contributing
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Testing
-
-Please see [TESTING.md](TESTING.md).
-
-## License
-
-The code in this repo is licensed under the [MIT License](LICENSE).
