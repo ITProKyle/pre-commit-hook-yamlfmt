@@ -51,15 +51,18 @@
         "isort",
         "kwarg",
         "labelmaker",
+        "loadfile",
         "maint",
         "mdformat",
         "noqa",
+        "numprocesses",
         "overlining",
         "printf",
         "pydoc",
         "pyenv",
         "pygment",
         "pyright",
+        "pytest",
         "recommonmark",
         "repos",
         "ruamel",
@@ -69,6 +72,7 @@
         "virtualenvs",
         "winget",
         "xargs",
+        "xdist",
         "yamlfmt"
     ]
 }
