@@ -33,7 +33,6 @@ autolabeler:  # cspell:ignore autolabeler
       - '**/*.py'
       - poetry.lock
       - pyproject.toml
-      - setup.cfg
   - label: release
     branch: [/^(release)\/.*/]
 categories:

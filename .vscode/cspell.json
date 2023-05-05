@@ -68,6 +68,8 @@
         "repos",
         "ruamel",
         "subclassing",
+        "substr",
+        "typeshed",
         "ungrouped",
         "venv",
         "virtualenvs",

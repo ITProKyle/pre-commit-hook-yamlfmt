@@ -3,20 +3,9 @@
 SHELL := /bin/bash
 
 help: ## show this message
-	@IFS=$$'\n' ; \
-	help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##/:/'`); \
-	printf "%-30s %s\n" "target" "help" ; \
-	printf "%-30s %s\n" "------" "----" ; \
-	for help_line in $${help_lines[@]}; do \
-		IFS=$$':' ; \
-		help_split=($$help_line) ; \
-		help_command=`echo $${help_split[0]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
-		help_info=`echo $${help_split[2]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
-		printf '\033[36m'; \
-		printf "%-30s %s" $$help_command ; \
-		printf '\033[0m'; \
-		printf "%s\n" $$help_info; \
-	done
+	@awk \
+		'BEGIN {FS = ":.*##"; printf "\nUsage: make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) }' \
+		$(MAKEFILE_LIST)
 
 fix-black: ## automatically fix all black errors
 	@poetry run black .
@@ -58,8 +47,11 @@ setup-npm: ## install node dependencies with npm
 	@npm ci
 
 setup-poetry: ## setup python virtual environment
-	@poetry install \
-		--remove-untracked
+	@if [[ -d .venv ]]; then \
+		poetry run python -m pip --version >/dev/null 2>&1 || rm -rf ./.venv/* ./.venv/.*; \
+	fi
+	@poetry lock --check
+	@poetry install $(POETRY_OPTS) --sync
 
 setup-pre-commit: ## install pre-commit git hooks
 	@poetry run pre-commit install

@@ -6,7 +6,7 @@ import argparse
 import sys
 from dataclasses import asdict, dataclass, field
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, List, NoReturn
+from typing import TYPE_CHECKING, Any, NoReturn
 
 from ruamel.yaml import YAML
 
@@ -14,21 +14,21 @@ if TYPE_CHECKING:
     from _typeshed import StrPath
 
 
-DEFAULT_COLONS = False
-DEFAULT_IMPLICIT_START = True
-DEFAULT_INDENT_MAPPING = 4
-DEFAULT_INDENT_OFFSET = 4
-DEFAULT_INDENT_SEQUENCE = 6
-DEFAULT_PRESERVE_QUOTES = True
-DEFAULT_WIDTH = 150
+DEFAULT_COLONS: Any = False
+DEFAULT_IMPLICIT_START: bool = True
+DEFAULT_INDENT_MAPPING: int = 4
+DEFAULT_INDENT_OFFSET: int = 4
+DEFAULT_INDENT_SEQUENCE: int = 6
+DEFAULT_PRESERVE_QUOTES: bool = True
+DEFAULT_WIDTH: int = 150
 
 
 @dataclass
 class Args:
     """Hook arguments."""
 
-    colons: bool = DEFAULT_COLONS
-    file_names: List[str] = field(default_factory=list)
+    colons: Any = DEFAULT_COLONS
+    file_names: list[str] = field(default_factory=list)
     implicit_start: bool = DEFAULT_IMPLICIT_START
     mapping: int = DEFAULT_INDENT_MAPPING
     offset: int = DEFAULT_INDENT_OFFSET
@@ -139,7 +139,7 @@ class Formatter:
 
     def __init__(
         self,
-        colons: bool = DEFAULT_COLONS,
+        colons: Any = DEFAULT_COLONS,
         implicit_start: bool = DEFAULT_IMPLICIT_START,
         mapping: int = DEFAULT_INDENT_MAPPING,
         offset: int = DEFAULT_INDENT_OFFSET,
