@@ -5,5 +5,5 @@
     "pyright": "^1.1.306"
   },
   "name": "pre-commit-hook-yamlfmt",
-  "version": "0.0.0"
+  "version": "0.2.1"
 }

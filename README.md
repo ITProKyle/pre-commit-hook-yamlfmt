@@ -28,7 +28,7 @@ Add to `.pre-commit-config.yaml` in your git repo:
 
 ```yaml
 - repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
-  rev: v0.2.0  # or specific tag
+  rev: v0.2.1  # or specific tag
   hooks:
     - id: yamlfmt
 ```
@@ -66,7 +66,7 @@ foo:
       args: [--format, parsable, --strict]
 
 - repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
-  rev: v0.2.0  # or specific tag
+  rev: v0.2.1  # or specific tag
   hooks:
     - id: yamlfmt
 ```
@@ -77,7 +77,7 @@ Add to `.pre-commit-config.yaml` in your git repo:
 
 ```yaml
 - repo: https://github.com/ITProKyle/pre-commit-hook-yamlfmt
-  rev: v0.2.0  # or specific tag
+  rev: v0.2.1  # or specific tag
   hooks:
     - id: yamlfmt
       args: [--mapping, '2', --sequence, '2', --offset, '0', --colons, --width, '150']
