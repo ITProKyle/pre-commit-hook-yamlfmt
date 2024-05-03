@@ -16,15 +16,18 @@ This hook formats the indentation of YAML files and optionally aligns top-level 
 > [!IMPORTANT]
 > Each versioned release of this hook is pinned to an exact version of it's direct dependencies to limit unexpected changes.
 
-## Arguments
+## Options
 
-- `--colons/--no-colons`: Whether to align top-level colons. _(default: `--no-colons`)_
-- `--implicit-start/--no-implicit-start`: Whether to remove explicit document start. _(default: `--implicit-start`)_
-- `-m, --mapping`: Number of space io indent mappings. _(default: `--mappings 4`)_
-- `-o, --offset`: Number of space to offset the dash (`-`) from sequences. _(default: `--offset 4`)_
-- `--preserve-quotes/--no-preserve-quotes`: Whether to keep existing string quotes. _(default: `--preserve-quotes`)_
-- `-s, --sequence`: Number of space to indent sequences. _(default: `--sequence 6`)_
-- `-w, --width`: Maximum line width. _(default: `--width 4096`)_
+| Option                                       | Default                  | Description                                         |
+| -------------------------------------------- | ------------------------ | --------------------------------------------------- |
+| `--allow-duplicate-keys/--no-duplicate-keys` | `--allow-duplicate-keys` | whether to allow duplicate keys                     |
+| `--colons/--no-colons`                       | `--no-colons`            | whether to align top-level colons                   |
+| `--implicit-start/--no-implicit-start`       | `implicit-start`         | whether to remove the explicit document start       |
+| `--mapping, -m`                              | `4`                      | number of spaces to indent mappings (dictionaries)  |
+| `--offset, -o`                               | `4`                      | number of spaces to offset the dash from sequences  |
+| `--preserve-quotes/--no-preserve-quotes`     | `--preserve-quotes`      | whether to keep existing string quoting             |
+| `--sequence, -s`                             | `6`                      | number of spaces to indent sequences (arrays/lists) |
+| `--width, -w`                                | `4096`                   | maximum line width                                  |
 
 ## How-to
 

@@ -8,6 +8,7 @@ import click
 from ruamel.yaml import YAML
 
 DEFAULT_COLONS: bool = False
+DEFAULT_DUPLICATE_KEYS: bool = False
 DEFAULT_IMPLICIT_START: bool = True
 DEFAULT_INDENT_MAPPING: int = 4
 DEFAULT_INDENT_OFFSET: int = 4
@@ -32,6 +33,13 @@ def format_yaml_file(yaml: YAML, file_path: Path) -> None:
 
 
 @click.command()
+@click.option(
+    "--allow-duplicate-keys/--no-duplicate-keys",
+    "allow_duplicate_keys",
+    default=DEFAULT_DUPLICATE_KEYS,
+    help="whether to allow duplicate keys",
+    is_flag=True,
+)
 @click.option(
     "--colons/--no-colons",
     default=DEFAULT_COLONS,
@@ -61,18 +69,18 @@ def format_yaml_file(yaml: YAML, file_path: Path) -> None:
     type=int,
 )
 @click.option(
+    "--preserve-quotes/--no-preserve-quotes",
+    default=DEFAULT_PRESERVE_QUOTES,
+    help="whether to keep existing string quoting",
+    is_flag=True,
+)
+@click.option(
     "--sequence",
     "-s",
     "indent_sequence",
     default=DEFAULT_INDENT_SEQUENCE,
     help="number of spaces to indent sequences (arrays/lists)",
     type=int,
-)
-@click.option(
-    "--preserve-quotes/--no-preserve-quotes",
-    default=DEFAULT_PRESERVE_QUOTES,
-    help="whether to keep existing string quoting",
-    is_flag=True,
 )
 @click.option(
     "--width", "-w", "max_width", default=DEFAULT_WIDTH, help="maximum line width", type=int
@@ -92,6 +100,7 @@ def format_yaml_file(yaml: YAML, file_path: Path) -> None:
 )
 def cli(  # noqa: PLR0913
     *,
+    allow_duplicate_keys: bool,
     colons: bool,
     file_paths: tuple[Path, ...],
     implicit_start: bool,
@@ -108,6 +117,7 @@ def cli(  # noqa: PLR0913
     """
     yaml = YAML(pure=True, typ="rt")
     yaml.allow_unicode = True
+    yaml.allow_duplicate_keys = allow_duplicate_keys
     yaml.explicit_start = not implicit_start
     yaml.map_indent = indent_mapping
     yaml.preserve_quotes = preserve_quotes
