@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pre-commit-hook-yamlfmt"
-version = "0.2.1"
+version = "0.3.0"
 authors = ["Kyle Finley <kyle@finley.sh>"]
 description = "YAML formatter for http://pre-commit.com."
 homepage = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
