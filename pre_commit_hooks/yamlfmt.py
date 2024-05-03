@@ -6,6 +6,7 @@ import argparse
 import sys
 from dataclasses import asdict, dataclass, field
 from functools import cached_property
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, NoReturn
 
 from ruamel.yaml import YAML
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
     from _typeshed import StrPath
 
 
-DEFAULT_COLONS: Any = False
+DEFAULT_COLONS: bool = False
 DEFAULT_IMPLICIT_START: bool = True
 DEFAULT_INDENT_MAPPING: int = 4
 DEFAULT_INDENT_OFFSET: int = 4
@@ -27,7 +28,7 @@ DEFAULT_WIDTH: int = 4096
 class Args:
     """Hook arguments."""
 
-    colons: Any = DEFAULT_COLONS
+    colons: bool = DEFAULT_COLONS
     file_names: list[str] = field(default_factory=list)
     implicit_start: bool = DEFAULT_IMPLICIT_START
     mapping: int = DEFAULT_INDENT_MAPPING
@@ -137,16 +138,17 @@ class Cli:
 class Formatter:
     """Reformat a yaml file with proper indentation. Preserve comments."""
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
-        colons: Any = DEFAULT_COLONS,
+        *,
+        colons: bool = DEFAULT_COLONS,
         implicit_start: bool = DEFAULT_IMPLICIT_START,
         mapping: int = DEFAULT_INDENT_MAPPING,
         offset: int = DEFAULT_INDENT_OFFSET,
         preserve_quotes: bool = DEFAULT_PRESERVE_QUOTES,
         sequence: int = DEFAULT_INDENT_SEQUENCE,
         width: int = DEFAULT_WIDTH,
-        **__kwargs: Any,
+        **__kwargs: object,
     ) -> None:
         """Instantiate class."""
         yaml = YAML()
@@ -156,35 +158,36 @@ class Formatter:
             sequence=sequence,
             offset=offset,
         )
-        yaml.top_level_colon_align = colons
+        yaml.top_level_colon_align = colons  # pyright: ignore[reportAttributeAccessIssue]
         yaml.explicit_start = not implicit_start
         yaml.width = width
         yaml.preserve_quotes = preserve_quotes
 
         self.yaml = yaml
-        self.content = list({})
+        self.content: list[Any] = list({})
 
     def format(self, path: StrPath) -> None:
         """Read file and write it out to same path."""
-        print(path, end="")
+        # TODO (kyle): remove uses for print
+        print(path, end="")  # noqa: T201
         self.parse_file(path)
         self.write_file(path)
-        print("  Done")
+        print("  Done")  # noqa: T201
 
     def parse_file(self, path: StrPath) -> None:
         """Read the file."""
         try:
-            with open(path, "r", encoding="utf-8") as stream:
-                self.content = list(self.yaml.load_all(stream))  # type: ignore
-        except IOError:
+            with Path(path).open(encoding="utf-8") as stream:
+                self.content = list(self.yaml.load_all(stream))
+        except OSError:
             self.fail(f"Unable to read {path}")
 
     def write_file(self, path: StrPath) -> None:
         """Write the file."""
         try:
-            with open(path, "w", encoding="utf-8") as stream:
+            with Path(path).open("w", encoding="utf-8") as stream:
                 self.yaml.dump_all(self.content, stream)
-        except IOError:
+        except OSError:
             self.fail(f"Unable to write {path}")
 
     @staticmethod

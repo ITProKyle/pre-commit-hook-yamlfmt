@@ -3,7 +3,7 @@
   "devDependencies": {
     "@itprokyle/cspell-dict": "^1.2.2",
     "cspell": "^8.7.0",
-    "pyright": "^1.1.306"
+    "pyright": "^1.1.361"
   },
   "name": "pre-commit-hook-yamlfmt",
   "version": "0.2.1"
