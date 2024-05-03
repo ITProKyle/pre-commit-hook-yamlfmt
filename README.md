@@ -6,8 +6,10 @@
 YAML formatter for [`pre-commit`](http://pre-commit.com).
 
 This hook formats the indentation of YAML files and optionally aligns top-level colons.
+[`ruamel.yaml`](https://yaml.readthedocs.io/en/latest/) is used to roundtrip YAML files, preserving comments as much as possible.
 
-It uses [`ruamel.yaml`](https://yaml.readthedocs.io/en/latest/) to do the heavy lifting and preserve comments within YAML files.
+> [!IMPORTANT]
+> Each versioned release of this hook is pinned to an exact version of it's direct dependencies to limit unexpected changes.
 
 ## Arguments
 

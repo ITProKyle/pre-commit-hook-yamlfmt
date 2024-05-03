@@ -178,7 +178,9 @@ class Formatter:
         """Read the file."""
         try:
             with Path(path).open(encoding="utf-8") as stream:
-                self.content = list(self.yaml.load_all(stream))
+                self.content = list(
+                    self.yaml.load_all(stream)  # pyright: ignore[reportUnknownArgumentType]
+                )
         except OSError:
             self.fail(f"Unable to read {path}")
 
