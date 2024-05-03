@@ -7,7 +7,7 @@ autolabeler:  # cspell:ignore autolabeler
   - label: changelog:skip
     branch: [/^(dependabot)\/.*/]
   - label: dependencies
-    branch: [/^(depend|dependabot)\/.*/]
+    branch: [/^(depend|dependabot|renovate)\/.*/]
   - label: documentation
     branch: [/^(docs)\/.*/]
   - label: feature
