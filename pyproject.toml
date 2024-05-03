@@ -13,7 +13,7 @@ readme = "README.md"
 repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.12.3"
 "ruamel.yaml" = "0.18.6"
 
 [tool.poetry.group.dev.dependencies]
