@@ -5,7 +5,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -48,7 +48,7 @@ repos:
         exclude: .pre-commit-hooks.yaml
         args: [--mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
+    rev: 0.7.17
     hooks:
       - id: mdformat
         additional_dependencies:
@@ -56,6 +56,6 @@ repos:
           - mdformat-gfm
           - mdformat-toc
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.34.0
+    rev: v0.39.0
     hooks:
       - id: markdownlint
