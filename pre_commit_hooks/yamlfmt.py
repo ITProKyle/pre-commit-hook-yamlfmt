@@ -24,11 +24,11 @@ def format_yaml_file(yaml: YAML, file_path: Path) -> None:
         file_path: Path to a YAML file.
 
     """
-    print(file_path, end="")  # noqa: T201
+    click.secho(f"{file_path}...", nl=False, fg="yellow")
     yaml.dump_all(
         list(yaml.load_all(file_path)), file_path  # pyright: ignore[reportUnknownArgumentType]
     )
-    print("  Done")  # noqa: T201
+    click.secho(" Done", bold=True, fg="green")
 
 
 @click.command()
