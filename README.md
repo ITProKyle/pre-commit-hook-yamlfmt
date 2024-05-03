@@ -8,10 +8,10 @@
 > [!NOTE]
 > This project is a fork of [jumanjihouse/pre-commit-hook-yamlfmt](https://github.com/jumanjihouse/pre-commit-hook-yamlfmt).
 
-YAML formatter for [`pre-commit`](http://pre-commit.com).
+YAML formatter for [`pre-commit`].
 
 This hook formats the indentation of YAML files and optionally aligns top-level colons.
-[`ruamel.yaml`](https://yaml.readthedocs.io/en/latest/) is used to roundtrip YAML files, preserving comments as much as possible.
+[`ruamel.yaml`] is used to roundtrip YAML files, preserving comments as much as possible.
 
 > [!IMPORTANT]
 > Each versioned release of this hook is pinned to an exact version of it's direct dependencies to limit unexpected changes.
@@ -28,6 +28,13 @@ This hook formats the indentation of YAML files and optionally aligns top-level 
 | `--preserve-quotes/--no-preserve-quotes`     | `--preserve-quotes`      | whether to keep existing string quoting             |
 | `--sequence, -s`                             | `6`                      | number of spaces to indent sequences (arrays/lists) |
 | `--width, -w`                                | `4096`                   | maximum line width                                  |
+
+> [!CAUTION]
+> If trying to use `--allow-duplicate-keys` to enable unpacking two anchors into a mapping (dictionary), this will not have the desired result.
+> In fact, it can cause breakage without warning other than [`pre-commit`] showing the file was changed.
+>
+> When used with this scenario, the first anchor will remain but all other anchors will be removed.
+> This is a flaw in [`ruamel.yaml`], not this hook.
 
 ## How-to
 
@@ -99,7 +106,7 @@ Add to `.pre-commit-config.yaml` in your git repo:
 
 #### On every commit
 
-If you want to invoke the checks as a git pre-commit hook, run:
+If you want to invoke the checks as a git [`pre-commit`] hook, run:
 
 ```console
 # Run on every commit.
@@ -119,8 +126,11 @@ pre-commit run --all-files
 
 ### Can I use `pip` to install this?
 
-No. It is strictly a [`pre-commit`](http://pre-commit.com) hook.
+No. It is strictly a [`pre-commit`] hook.
 
 ### Is this project related to [`yamlfmt`](https://pypi.org/project/yamlfmt/)?
 
 No.
+
+[`pre-commit`]: http://pre-commit.com
+[`ruamel.yaml`]: https://yaml.readthedocs.io/en/latest/
