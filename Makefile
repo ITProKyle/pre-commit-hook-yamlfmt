@@ -14,32 +14,27 @@ help: ## show this message
 fix-black: ## automatically fix all black errors
 	@poetry run black .
 
-fix-isort: ## automatically fix all isort errors
-	@poetry run isort .
-
 fix-md: ## automatically fix markdown format errors
 	@poetry run pre-commit run mdformat --all-files
 
-lint: lint-black lint-isort lint-pyright lint-flake8 ## run linters
+fix-ruff: ## automatically fix everything ruff can fix (implies fix-imports)
+	@poetry run ruff check . --fix-only
+
+lint: lint-black lint-ruff lint-pyright ## run all linters
 
 lint-black: ## run black
 	@echo "Running black... If this fails, run 'make fix-black' to resolve."
 	@poetry run black . --check --color --diff
 	@echo ""
 
-lint-flake8: ## run flake8
-	@echo "Running flake8..."
-	@poetry run flake8
-	@echo ""
-
-lint-isort: ## run isort
-	@echo "Running isort... If this fails, run 'make fix-isort' to resolve."
-	@poetry run isort . --check-only
-	@echo ""
-
 lint-pyright: ## run pyright
 	@echo "Running pyright..."
 	@npm exec --no -- pyright --venvpath ./
+	@echo ""
+
+lint-ruff: ## run ruff
+	@echo "Running ruff... If this fails, run 'make fix-ruff' to resolve some error automatically, other require manual action."
+	@poetry run ruff check .
 	@echo ""
 
 run-pre-commit: ## run pre-commit for all files

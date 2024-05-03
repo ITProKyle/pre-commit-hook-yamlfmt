@@ -17,23 +17,11 @@ python = "^3.8.1"
 "ruamel.yaml" = "^0.17.21"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-flake8 = "^6.0.0"
-flake8-bugbear = "^23.3.23"  # flake8 plugin
-flake8-comprehensions = "^3.12.0"  # flake8 plugin
-flake8-docstrings = "^1.7.0"  # flake8 plugin
-flake8-use-fstring = "^1.4"  # flake8 plugin
-isort = "^5.12.0"
-mock = "^5.0.2"
-pep8-naming = "^0.13.3"  # flake8 plugin
-pre-commit = "^3.3.1"
-pydocstyle = "^6.3.0"  # flake8 plugin
-pylint = "^2.17.3"
-pytest = "^7.3.1"
-pytest-cov = "^4.0.0"  # pytest plugin
-pytest-mock = "^3.10.0"  # pytest plugin
-pytest-sugar = "^0.9.7"  # pytest plugin
-pytest-xdist = "^3.2.1"  # pytest plugin
+pre-commit = "^3.5.0"
+
+[tool.poetry.group.lint.dependencies]
+black = "^24.4.0"
+ruff = "^0.4.2"
 
 [tool.poetry.scripts]
 yamlfmt = "pre_commit_hooks.yamlfmt:main"
@@ -52,14 +40,13 @@ force-exclude = '''
 )/
 '''
 include = '\.pyi?$'
-line-length = 88
-target-version = ["py38", "py39"]
+line-length = 100
+target-version = ["py310", "py311", "py312", "py38", "py39"]
 
 [tool.coverage.report]
 exclude_lines = [
   "@overload",
   "cov: ignore",  # standard exclude comment
-  "from pathlib import Path",
   "if TYPE_CHECKING:",  # excluded blocks
   "if __name__ == .__main__.:",
   "raise AssertionError",  # defensive exceptions
@@ -68,92 +55,6 @@ exclude_lines = [
 # fail_under = 90  # set a minimum coverage percentage
 precision = 2
 show_missing = true
-
-[tool.coverage.run]
-omit = [
-  "*/type_defs.py",  # assuming this would not contain any logic
-]
-
-[tool.isort]
-profile = "black"
-skip = [
-  ".eggs",
-  ".git",
-  ".runway",
-  ".serverless",
-  ".venv",
-  "_build",
-  "build",
-  "dist",
-  "node_modules",
-]
-
-[tool.pylint.basic]
-good-names = [
-  "_",
-  "a",
-  "b",
-  "ca",
-  "ci",
-  "db",
-  "f",
-  "fn",
-  "i",
-  "id",
-  "j",
-  "k",
-  "ok",
-  "s3",
-  "ui",
-  "up",
-  "v",
-]
-
-[tool.pylint.classes]
-defining-attr-methods = ["__init__", "__new__"]
-
-[tool.pylint.design]
-max-args = 50
-max-attributes = 50
-max-bool-expr = 5
-max-branches = 20
-max-locals = 25
-max-parents = 10
-max-public-methods = 30
-max-returns = 6
-max-statements = 50
-min-public-methods = 0
-
-[tool.pylint.format]
-max-line-length = 100
-max-module-lines = 1000
-
-[tool.pylint.imports]
-allow-wildcard-with-all = "no"
-
-[tool.pylint.logging]
-logging-format-style = "old"
-
-[tool.pylint.main]
-disable = [
-  "line-too-long",
-  "missing-class-docstring",
-  "missing-function-docstring",
-  "missing-module-docstring",
-  "similarities",
-  "ungrouped-imports",
-]
-jobs = 0
-
-[tool.pylint.miscellaneous]
-notes = [
-  "FIXME",
-]
-
-[tool.pylint.reports]
-msg-template = "{path}:{line}:{column}: {msg_id}: {msg} ({symbol})"
-output-format = "colorized"
-score = "yes"
 
 [tool.pyright]
 exclude = [
@@ -194,11 +95,51 @@ filterwarnings = [
 markers = [
   "wip: isolate tests currently being worked on.",
 ]
-minversion = 6.2
 python_classes = ["Test*"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
 testpaths = ["tests"]
+
+[tool.ruff]  # https://docs.astral.sh/ruff/settings/#top-level
+force-exclude = true
+line-length = 120
+show-fixes = true
+target-version = "py311"
+
+[tool.ruff.lint]  # https://docs.astral.sh/ruff/settings/#lint
+ignore = [
+  "ANN101",  # Missing type annotation for `self` in method
+  "ANN102",  # Missing type annotation for `cls` in classmethod
+  "COM812",  # Trailing comma missing
+  "D203",  # 1 blank line required before class docstring
+  "D213",  # Multi-line docstring summary should start at the second line
+  "D215",  # Section underline is over-indented
+  "D403",  # First word of the first line should be capitalized
+  "D406",  # Section name should end with a newline
+  "D407",  # Missing dashed underline after section
+  "D408",  # Section underline should be in the line following the section's name
+  "D409",  # Section underline should match the length of its name
+  "FIX002",  # Line contains TODO
+  "TD003",  # Missing issue link on the line following this TODO
+  "TID252",  # Relative imports from parent modules are banned
+]
+ignore-init-module-imports = true
+select = ["ALL"]
+
+[tool.ruff.lint.extend-per-file-ignores]  # https://docs.astral.sh/ruff/settings/#lintextend-per-file-ignores
+"tests/*" = [
+  "FBT001",  # Boolean positional arg in function definition - this is fine here
+  "FBT003",  # Boolean positional value in function call - this is fine here
+  "S101",  # Use of `assert` detected - this is fine here
+  "S108",  # Probable insecure usage of temporary file or directory
+  "SLF001",  # Private member accessed - fine in tests
+]
+
+[tool.ruff.lint.pydocstyle]  # https://docs.astral.sh/ruff/settings/#lintpydocstyle
+convention = "google"
+
+[tool.ruff.lint.pylint]  # https://docs.astral.sh/ruff/settings/#lintpylint
+allow-magic-value-types = ["bytes", "int", "str"]
 
 [tool.tomlsort]
 all = true

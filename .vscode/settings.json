@@ -1,9 +1,17 @@
 {
     "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports": "always"
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.detectIndentation": false,
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": true,
         "editor.rulers": [
-            79,
-            100,
-            120
+            81,
+            88,
+            100
         ],
         "editor.tabSize": 4
     },
@@ -15,16 +23,5 @@
     ],
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/",
-    "python.formatting.provider": "black",
-    "python.linting.flake8Enabled": true,
-    "python.linting.mypyEnabled": false,
-    "python.linting.pylintArgs": [
-        "--rcfile=pyproject.toml"
-    ],
-    "python.linting.pylintEnabled": true,
-    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
-    "restructuredtext.linter.extraArgs": [
-        "--ignore D001"
-    ]
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
 }
