@@ -13,7 +13,7 @@ readme = "README.md"
 repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 
 [tool.poetry.dependencies]
-python = "^3.8.1"
+python = "^3.9"
 "ruamel.yaml" = "^0.17.21"
 
 [tool.poetry.group.dev.dependencies]
@@ -41,7 +41,7 @@ force-exclude = '''
 '''
 include = '\.pyi?$'
 line-length = 100
-target-version = ["py310", "py311", "py312", "py38", "py39"]
+target-version = ["py310", "py311", "py312", "py39"]
 
 [tool.coverage.report]
 exclude_lines = [
@@ -67,7 +67,7 @@ exclude = [
   "**/node_modules",
   "**/typings",
 ]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
 reportDuplicateImport = "none"
 reportImportCycles = "none"
 reportIncompatibleMethodOverride = "warning"
@@ -104,7 +104,7 @@ testpaths = ["tests"]
 force-exclude = true
 line-length = 120
 show-fixes = true
-target-version = "py311"
+target-version = "py39"
 
 [tool.ruff.lint]  # https://docs.astral.sh/ruff/settings/#lint
 ignore = [
