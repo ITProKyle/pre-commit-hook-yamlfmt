@@ -1,81 +1,12 @@
 {
-    "ignorePaths": [
-        "**/*.egg-info/**",
-        "**/*.css",
-        "**/*.js",
-        "**/*.pyc",
-        "**/*.ts",
-        "**/.runway/**",
-        "**/.serverless/**",
-        "**/.terraform/**",
-        "**/.venv/**",
-        "**/Pipfile.lock",
-        "**/__pycache__/**",
-        "**/_gitignore",
-        "**/angular.json",
-        "**/build/**",
-        "**/dist/**",
-        "**/dot_gitignore",
-        "**/node_modules/**",
-        "**/package-lock.json",
-        "**/package.json",
-        "**/poetry.lock",
-        "**/requirements.txt",
-        "**/tsconfig.json",
-        ".vscode/dictionaries/*.txt",
-        "typings/**"
-    ],
-    "language": "en",
-    "languageSettings": [
-        {
-            "allowCompoundWords": true,
-            "dictionaries": [
-                "python"
-            ],
-            "languageId": "toml"
-        }
+    "allowCompoundWords": true,
+    "import": [
+        "@itprokyle/cspell-dict/cspell-ext.json"
     ],
     "maxNumberOfProblems": 100,
     "version": "0.2",
     "words": [
-        "asdict",
-        "autofix",
-        "boto",
-        "direnv",
-        "docstrings",
-        "favicon",
-        "fgrep",
-        "frontmatter",
-        "fstring",
-        "howto",
-        "isort",
-        "jumanjihouse",
-        "kwarg",
-        "labelmaker",
-        "loadfile",
-        "maint",
-        "mdformat",
-        "noqa",
-        "numprocesses",
-        "overlining",
-        "printf",
-        "pydoc",
-        "pyenv",
-        "pygment",
-        "pyright",
-        "pytest",
-        "recommonmark",
-        "repos",
         "ruamel",
-        "subclassing",
-        "substr",
-        "typeshed",
-        "ungrouped",
-        "venv",
-        "virtualenvs",
-        "winget",
-        "xargs",
-        "xdist",
-        "yamlfmt"
+        "jumanjihouse"
     ]
 }

@@ -1,27 +1,18 @@
 root = true
 
 [*]
+charset = utf-8
 end_of_line = lf
+indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.json]
+[{*.{json,py},Makefile}]
 indent_size = 4
-
-[*.{html,md,rst,sh,toml,xml,yml,yaml}]
-indent_size = 2
-
-[*.{ps1,psd1,py}]
-charset = utf-8
-indent_size = 4
-
-[*.rst]
-indent_size = 2
 
 [Makefile]
-indent_size = 4
 indent_style = tab
 
-[{package,package-lock}.json]
+[{cdk,package,package-lock,tsconfig,tslint}.json]
 indent_size = 2

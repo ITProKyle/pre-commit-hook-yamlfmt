@@ -1,6 +1,10 @@
-.PHONY: docs
-
+CI := $(if $(CI),yes,no)
 SHELL := /bin/bash
+
+ifeq ($(CI), yes)
+	POETRY_OPTS = "-v"
+	PRE_COMMIT_OPTS = --show-diff-on-failure --verbose
+endif
 
 help: ## show this message
 	@awk \
@@ -35,11 +39,13 @@ lint-isort: ## run isort
 
 lint-pyright: ## run pyright
 	@echo "Running pyright..."
-	@npx pyright --venv-path ./
+	@npm exec --no -- pyright --venvpath ./
 	@echo ""
 
 run-pre-commit: ## run pre-commit for all files
-	@poetry run pre-commit run -a
+	@poetry run pre-commit run $(PRE_COMMIT_OPTS) \
+		--all-files \
+		--color always
 
 setup: setup-poetry setup-pre-commit setup-npm ## setup dev environment
 
@@ -47,10 +53,7 @@ setup-npm: ## install node dependencies with npm
 	@npm ci
 
 setup-poetry: ## setup python virtual environment
-	@if [[ -d .venv ]]; then \
-		poetry run python -m pip --version >/dev/null 2>&1 || rm -rf ./.venv/* ./.venv/.*; \
-	fi
-	@poetry lock --check
+	@poetry check
 	@poetry install $(POETRY_OPTS) --sync
 
 setup-pre-commit: ## install pre-commit git hooks
@@ -58,9 +61,11 @@ setup-pre-commit: ## install pre-commit git hooks
 
 spellcheck: ## run cspell
 	@echo "Running cSpell to checking spelling..."
-	@npx cspell "**/*" \
+	@npm exec --no -- cspell lint . \
 		--color \
 		--config .vscode/cspell.json \
+		--dot \
+		--gitignore \
 		--must-find-files \
 		--no-progress \
 		--relative \
