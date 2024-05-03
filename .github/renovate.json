@@ -1,0 +1,21 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>finleyfamily/renovate"
+    ],
+    "packageRules": [
+        {
+            "description": "pin dependencies",
+            "matchCategories": [
+                "python"
+            ],
+            "matchDepTypes": [
+                "dependencies"
+            ],
+            "rangeStrategy": "pin"
+        }
+    ],
+    "reviewers": [
+        "ITProKyle"
+    ]
+}

@@ -1,5 +1,10 @@
 # YAML formatter for pre-commit git hooks
 
+[![default](https://github.com/ITProKyle/pre-commit-hook-yamlfmt/actions/workflows/on-push.yml/badge.svg)](https://github.com/ITProKyle/pre-commit-hook-yamlfmt/actions/workflows/on-push.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![GitHub Release](https://img.shields.io/github/v/release/ITProKyle/pre-commit-hook-yamlfmt)](https://github.com/ITProKyle/pre-commit-hook-yamlfmt/releases)
+[![renovate](https://img.shields.io/badge/enabled-brightgreen?logo=renovatebot&logoColor=%2373afae&label=renovate)](https://developer.mend.io/)
+
 > [!NOTE]
 > This project is a fork of [jumanjihouse/pre-commit-hook-yamlfmt](https://github.com/jumanjihouse/pre-commit-hook-yamlfmt).
 
