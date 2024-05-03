@@ -23,5 +23,6 @@
     ],
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
+    "python.analysis.typeCheckingMode": "strict",
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
 }

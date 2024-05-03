@@ -51,12 +51,9 @@ repos:
       - id: yamlfmt
         name: Format YAML files with overrides
         description: Format YAML files with overrides
-        entry: python -m pre_commit_hooks.yamlfmt
-        language: python
+        entry: poetry run python -m pre_commit_hooks.yamlfmt
+        language: system
         types: [yaml]
-        additional_dependencies:
-          - ./
-          - ruamel.yaml
         exclude: .pre-commit-hooks.yaml
         args: [--mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
   - repo: https://github.com/executablebooks/mdformat

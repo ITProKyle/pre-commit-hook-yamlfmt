@@ -2,18 +2,10 @@
 """Format YAML files."""
 from __future__ import annotations
 
-import argparse
-import sys
-from dataclasses import asdict, dataclass, field
-from functools import cached_property
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, NoReturn
 
+import click
 from ruamel.yaml import YAML
-
-if TYPE_CHECKING:
-    from _typeshed import StrPath
-
 
 DEFAULT_COLONS: bool = False
 DEFAULT_IMPLICIT_START: bool = True
@@ -24,188 +16,109 @@ DEFAULT_PRESERVE_QUOTES: bool = True
 DEFAULT_WIDTH: int = 4096
 
 
-@dataclass
-class Args:
-    """Hook arguments."""
+def format_yaml_file(yaml: YAML, file_path: Path) -> None:
+    """Format the provided YAML file.
 
-    colons: bool = DEFAULT_COLONS
-    file_names: list[str] = field(default_factory=list)
-    implicit_start: bool = DEFAULT_IMPLICIT_START
-    mapping: int = DEFAULT_INDENT_MAPPING
-    offset: int = DEFAULT_INDENT_OFFSET
-    preserve_quotes: bool = DEFAULT_PRESERVE_QUOTES
-    sequence: int = DEFAULT_INDENT_SEQUENCE
-    width: int = DEFAULT_WIDTH
+    Args:
+        yaml: Configured instance of ``ruamel.yaml.YAML``.
+        file_path: Path to a YAML file.
 
-
-class Cli:
-    """Command line interface."""
-
-    def __init__(self) -> None:
-        """Instantiate class."""
-        parser = argparse.ArgumentParser(
-            description="Format YAML files",
-            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-            epilog="Tips at https://yaml.readthedocs.io/en/latest/detail.html",
-        )
-        parser.add_argument(
-            "-m",
-            "--mapping",
-            type=int,
-            default=DEFAULT_INDENT_MAPPING,
-            help="number of spaces to indent mappings (dictionaries)",
-        )
-        parser.add_argument(
-            "-s",
-            "--sequence",
-            type=int,
-            default=DEFAULT_INDENT_SEQUENCE,
-            help="number of spaces to indent sequences (arrays/lists)",
-        )
-        parser.add_argument(
-            "-o",
-            "--offset",
-            type=int,
-            default=DEFAULT_INDENT_OFFSET,
-            help="number of spaces to offset the dash from sequences",
-        )
-        parser.add_argument(
-            "--colons",
-            action="store_const",
-            const=True,
-            default=DEFAULT_COLONS,
-            dest="preserve_quotes",
-            help="whether to align top-level colons",
-        )
-        parser.add_argument(
-            "--no-colons",
-            action="store_const",
-            const=False,
-            dest="preserve_quotes",
-            help="whether to align top-level colons",
-        )
-        parser.add_argument(
-            "-w",
-            "--width",
-            type=int,
-            default=DEFAULT_WIDTH,
-            help="maximum line width",
-        )
-        parser.add_argument(
-            "--preserve-quotes",
-            action="store_const",
-            const=True,
-            default=DEFAULT_PRESERVE_QUOTES,
-            dest="preserve_quotes",
-            help="whether to keep existing string quoting",
-        )
-        parser.add_argument(
-            "--no-preserve-quotes",
-            action="store_const",
-            const=False,
-            dest="preserve_quotes",
-            help="whether to keep existing string quoting",
-        )
-        parser.add_argument(
-            "--implicit-start",
-            action="store_const",
-            const=True,
-            default=DEFAULT_IMPLICIT_START,
-            dest="implicit_start",
-            help="whether to remove the explicit document start",
-        )
-        parser.add_argument(
-            "--no-implicit-start",
-            action="store_const",
-            const=False,
-            dest="implicit_start",
-            help="whether to remove the explicit document start",
-        )
-        parser.add_argument(
-            "file_names",
-            metavar="FILE_NAME",
-            nargs="*",
-            help="space-separated list of YAML file names",
-        )
-        self.parser = parser
-
-    @cached_property
-    def args(self) -> Args:
-        """CLI arguments."""
-        return Args(**self.parser.parse_args().__dict__)
+    """
+    print(file_path, end="")  # noqa: T201
+    yaml.dump_all(
+        list(yaml.load_all(file_path)), file_path  # pyright: ignore[reportUnknownArgumentType]
+    )
+    print("  Done")  # noqa: T201
 
 
-class Formatter:
-    """Reformat a yaml file with proper indentation. Preserve comments."""
+@click.command()
+@click.option(
+    "--colons/--no-colons",
+    default=DEFAULT_COLONS,
+    help="whether to align top-level colons",
+    is_flag=True,
+)
+@click.option(
+    "--implicit-start/--no-implicit-start",
+    default=DEFAULT_IMPLICIT_START,
+    help="whether to remove the explicit document start",
+    is_flag=True,
+)
+@click.option(
+    "--mapping",
+    "-m",
+    "indent_mapping",
+    default=DEFAULT_INDENT_MAPPING,
+    help="number of spaces to indent mappings (dictionaries)",
+    type=int,
+)
+@click.option(
+    "--offset",
+    "-o",
+    "indent_offset",
+    default=DEFAULT_INDENT_OFFSET,
+    help="number of spaces to offset the dash from sequences",
+    type=int,
+)
+@click.option(
+    "--sequence",
+    "-s",
+    "indent_sequence",
+    default=DEFAULT_INDENT_SEQUENCE,
+    help="number of spaces to indent sequences (arrays/lists)",
+    type=int,
+)
+@click.option(
+    "--preserve-quotes/--no-preserve-quotes",
+    default=DEFAULT_PRESERVE_QUOTES,
+    help="whether to keep existing string quoting",
+    is_flag=True,
+)
+@click.option(
+    "--width", "-w", "max_width", default=DEFAULT_WIDTH, help="maximum line width", type=int
+)
+@click.argument(
+    "file_paths",
+    nargs=-1,
+    type=click.Path(
+        dir_okay=False,
+        exists=True,
+        file_okay=True,
+        path_type=Path,
+        readable=True,
+        resolve_path=True,
+        writable=True,
+    ),
+)
+def cli(  # noqa: PLR0913
+    *,
+    colons: bool,
+    file_paths: tuple[Path, ...],
+    implicit_start: bool,
+    indent_mapping: int,
+    indent_offset: int,
+    indent_sequence: int,
+    max_width: int,
+    preserve_quotes: bool,
+) -> None:
+    """yamlfmt pre-commit hook.
 
-    def __init__(  # noqa: PLR0913
-        self,
-        *,
-        colons: bool = DEFAULT_COLONS,
-        implicit_start: bool = DEFAULT_IMPLICIT_START,
-        mapping: int = DEFAULT_INDENT_MAPPING,
-        offset: int = DEFAULT_INDENT_OFFSET,
-        preserve_quotes: bool = DEFAULT_PRESERVE_QUOTES,
-        sequence: int = DEFAULT_INDENT_SEQUENCE,
-        width: int = DEFAULT_WIDTH,
-        **__kwargs: object,
-    ) -> None:
-        """Instantiate class."""
-        yaml = YAML()
-        yaml.allow_unicode = True
-        yaml.indent(
-            mapping=mapping,
-            sequence=sequence,
-            offset=offset,
-        )
-        yaml.top_level_colon_align = colons  # pyright: ignore[reportAttributeAccessIssue]
-        yaml.explicit_start = not implicit_start
-        yaml.width = width
-        yaml.preserve_quotes = preserve_quotes
+    Documentation for the YAML parser used: https://yaml.readthedocs.io/en/latest/
 
-        self.yaml = yaml
-        self.content: list[Any] = list({})
+    """
+    yaml = YAML(pure=True, typ="rt")
+    yaml.allow_unicode = True
+    yaml.explicit_start = not implicit_start
+    yaml.map_indent = indent_mapping
+    yaml.preserve_quotes = preserve_quotes
+    yaml.sequence_dash_offset = indent_offset
+    yaml.sequence_indent = indent_sequence
+    yaml.top_level_colon_align = colons  # pyright: ignore[reportAttributeAccessIssue]
+    yaml.width = max_width
 
-    def format(self, path: StrPath) -> None:
-        """Read file and write it out to same path."""
-        # TODO (kyle): remove uses for print
-        print(path, end="")  # noqa: T201
-        self.parse_file(path)
-        self.write_file(path)
-        print("  Done")  # noqa: T201
-
-    def parse_file(self, path: StrPath) -> None:
-        """Read the file."""
-        try:
-            with Path(path).open(encoding="utf-8") as stream:
-                self.content = list(
-                    self.yaml.load_all(stream)  # pyright: ignore[reportUnknownArgumentType]
-                )
-        except OSError:
-            self.fail(f"Unable to read {path}")
-
-    def write_file(self, path: StrPath) -> None:
-        """Write the file."""
-        try:
-            with Path(path).open("w", encoding="utf-8") as stream:
-                self.yaml.dump_all(self.content, stream)
-        except OSError:
-            self.fail(f"Unable to write {path}")
-
-    @staticmethod
-    def fail(msg: str) -> NoReturn:
-        """Abort."""
-        sys.stderr.write(msg)
-        sys.exit(1)
-
-
-def main() -> None:
-    """Execute module."""
-    cli = Cli()
-    formatter = Formatter(**asdict(cli.args))
-    for file_name in cli.args.file_names:
-        formatter.format(file_name)
+    for file_path in file_paths:
+        format_yaml_file(yaml, file_path)
 
 
 if __name__ == "__main__":
-    main()
+    cli.main()
