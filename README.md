@@ -1,12 +1,13 @@
 # YAML formatter for pre-commit git hooks
 
-> This repo is a fork of [jumanjihouse/pre-commit-hook-yamlfmt](https://github.com/jumanjihouse/pre-commit-hook-yamlfmt).
+> [!NOTE]
+> This project is a fork of [jumanjihouse/pre-commit-hook-yamlfmt](https://github.com/jumanjihouse/pre-commit-hook-yamlfmt).
 
-YAML formatter for [pre-commit](http://pre-commit.com).
+YAML formatter for [`pre-commit`](http://pre-commit.com).
 
 This hook formats the indentation of YAML files and optionally aligns top-level colons.
 
-It uses [ruamel.yaml](https://yaml.readthedocs.io/en/latest/) to do the heavy lifting and preserve comments within YAML files.
+It uses [`ruamel.yaml`](https://yaml.readthedocs.io/en/latest/) to do the heavy lifting and preserve comments within YAML files.
 
 ## Arguments
 
@@ -33,7 +34,8 @@ Add to `.pre-commit-config.yaml` in your git repo:
     - id: yamlfmt
 ```
 
-:bulb: If a pre-commit hook changes a file, the hook fails with a warning that files were changed.
+> [!TIP]
+> If a pre-commit hook changes a file, the hook fails with a warning that files were changed.
 
 Given this input:
 
@@ -102,3 +104,13 @@ If you want to run the checks on-demand (outside of git hooks), run:
 # Run on-demand.
 pre-commit run --all-files
 ```
+
+## FAQs
+
+### Can I use `pip` to install this?
+
+No. It is strictly a [`pre-commit`](http://pre-commit.com) hook.
+
+### Is this project related to [`yamlfmt`](https://pypi.org/project/yamlfmt/)?
+
+No.
