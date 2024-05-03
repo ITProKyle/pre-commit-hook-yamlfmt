@@ -1,20 +1,19 @@
 [tool.poetry]
 name = "pre-commit-hook-yamlfmt"
 version = "0.2.1"
-description = "YAML formatter for http://pre-commit.com."
-license = "Apache-2.0"
 authors = ["Kyle Finley <kyle@finley.sh>"]
-readme = "README.md"
+description = "YAML formatter for http://pre-commit.com."
 homepage = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
-repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 keywords = ["pre-commit"]
+license = "Apache-2.0"
 packages = [
-  { include = "pre_commit_hooks" },
+  {include = "pre_commit_hooks"},
 ]
+readme = "README.md"
+repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
-
 "ruamel.yaml" = "^0.17.21"
 
 [tool.poetry.group.dev.dependencies]
@@ -39,12 +38,6 @@ pytest-xdist = "^3.2.1"  # pytest plugin
 [tool.poetry.scripts]
 yamlfmt = "pre_commit_hooks.yamlfmt:main"
 
-
-[build-system]
-requires = ["poetry-core>=1.0.7"]
-build-backend = "poetry.core.masonry.api"
-
-
 [tool.black]
 force-exclude = '''
 /(
@@ -62,16 +55,15 @@ include = '\.pyi?$'
 line-length = 88
 target-version = ["py38", "py39"]
 
-
 [tool.coverage.report]
 exclude_lines = [
+  "@overload",
   "cov: ignore",  # standard exclude comment
+  "from pathlib import Path",
   "if TYPE_CHECKING:",  # excluded blocks
   "if __name__ == .__main__.:",
   "raise AssertionError",  # defensive exceptions
   "raise NotImplementedError",
-  "from pathlib import Path",
-  "@overload",
 ]
 # fail_under = 90  # set a minimum coverage percentage
 precision = 2
@@ -81,7 +73,6 @@ show_missing = true
 omit = [
   "*/type_defs.py",  # assuming this would not contain any logic
 ]
-
 
 [tool.isort]
 profile = "black"
@@ -96,7 +87,6 @@ skip = [
   "dist",
   "node_modules",
 ]
-
 
 [tool.pylint.basic]
 good-names = [
@@ -165,14 +155,13 @@ msg-template = "{path}:{line}:{column}: {msg_id}: {msg} ({symbol})"
 output-format = "colorized"
 score = "yes"
 
-
 [tool.pyright]
 exclude = [
-  "**/__pycache__",
   "**/.eggs",
   "**/.git",
   "**/.runway",
   "**/.venv",
+  "**/__pycache__",
   "**/docs",
   "**/node_modules",
   "**/typings",
@@ -193,7 +182,6 @@ typeCheckingMode = "strict"
 useLibraryCodeForTypes = true
 venv = ".venv"
 
-
 [tool.pytest.ini_options]
 addopts = [
   "--cov-config=pyproject.toml",
@@ -211,3 +199,16 @@ python_classes = ["Test*"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
 testpaths = ["tests"]
+
+[tool.tomlsort]
+all = true
+in_place = true
+sort_first = ["tool", "tool.poetry"]
+spaces_before_inline_comment = 2
+trailing_comma_inline_array = true
+overrides."tool.poetry".first = ["name", "version"]
+overrides."tool.poetry.dependencies".first = ["python"]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.7"]
