@@ -24,7 +24,7 @@ This hook formats the indentation of YAML files and optionally aligns top-level 
 - `-o, --offset`: Number of space to offset the dash (`-`) from sequences. _(default: `--offset 4`)_
 - `--preserve-quotes/--no-preserve-quotes`: Whether to keep existing string quotes. _(default: `--preserve-quotes`)_
 - `-s, --sequence`: Number of space to indent sequences. _(default: `--sequence 6`)_
-- `-w, --width`: Maximum line width. _(default: `--width 150`)_
+- `-w, --width`: Maximum line width. _(default: `--width 4096`)_
 
 ## How-to
 
