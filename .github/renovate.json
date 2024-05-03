@@ -12,6 +12,9 @@
             "matchDepTypes": [
                 "dependencies"
             ],
+            "matchPackageNames": [
+                "ruamel.yaml"
+            ],
             "rangeStrategy": "pin"
         }
     ],
