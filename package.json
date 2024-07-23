@@ -2,7 +2,7 @@
   "description": "YAML formatter for [pre-commit](http://pre-commit.com).",
   "devDependencies": {
     "@itprokyle/cspell-dict": "^1.2.4",
-    "cspell": "^8.11.0",
+    "cspell": "^8.12.1",
     "pyright": "^1.1.372"
   },
   "name": "pre-commit-hook-yamlfmt",
