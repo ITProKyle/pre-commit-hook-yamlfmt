@@ -12,7 +12,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -43,7 +43,7 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.23.1
+    rev: v0.24.2
     hooks:
       - id: toml-sort-fix
   - repo: local
@@ -61,7 +61,7 @@ repos:
         exclude: .pre-commit-hooks.yaml
         args: [--mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.17
+    rev: 0.7.21
     hooks:
       - id: mdformat
         additional_dependencies:
@@ -70,6 +70,6 @@ repos:
           - mdformat-gfm-alerts
           - mdformat-tables
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.40.0
+    rev: v0.43.0
     hooks:
       - id: markdownlint
