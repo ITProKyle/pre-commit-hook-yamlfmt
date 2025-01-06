@@ -15,7 +15,7 @@ repository = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "8.1.8"
-"ruamel.yaml" = "0.18.8"
+"ruamel.yaml" = "0.18.10"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.1"
