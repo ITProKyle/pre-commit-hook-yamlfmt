@@ -5,7 +5,7 @@ authors = [
 ]
 dependencies = [
   "click (==8.1.8)",
-  "ruamel.yaml (==0.18.8)",
+  "ruamel.yaml (==0.18.10)",
 ]
 description = "YAML formatter for http://pre-commit.com."
 dynamic = ["version"]
@@ -18,17 +18,17 @@ requires-python = ">=3.9, <4"
 [project.scripts]
 yamlfmt = "pre_commit_hooks.yamlfmt:cli"
 
-[project.urls]
+[project.urls]  # https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels
 changelog = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt/releases"
 homepage = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 issues = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt/issues"
 source = "https://github.com/ITProKyle/pre-commit-hook-yamlfmt"
 
 [tool.poetry]
-version = "0.3.1"
 packages = [
   {include = "pre_commit_hooks"},
 ]
+version = "0.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.1.0"
@@ -159,7 +159,6 @@ sort_first = ["project", "tool", "tool.poetry"]
 spaces_before_inline_comment = 2
 trailing_comma_inline_array = true
 overrides.project.first = ["name", "version"]
-overrides."tool.poetry".first = ["version"]
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
