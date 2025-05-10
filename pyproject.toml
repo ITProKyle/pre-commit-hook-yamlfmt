@@ -13,7 +13,7 @@ keywords = [
   "pre-commit",
 ]
 license = {text = "Apache-2.0"}
-requires-python = ">=3.9, <4"
+requires-python = ">=3.13.3, <4"
 
 [project.scripts]
 yamlfmt = "pre_commit_hooks.yamlfmt:cli"
