@@ -22,7 +22,7 @@ jobs:
       matrix:
         python-version: [3.9, '3.10', 3.11, 3.12]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -34,7 +34,7 @@ jobs:
   spellcheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -48,7 +48,7 @@ jobs:
       matrix:
         python-version: [3.9, '3.10', 3.11, 3.12]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ITProKyle/action-setup-python@v1.2.0
         with:
           python-version: ${{ matrix.python-version }}
