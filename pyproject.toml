@@ -4,7 +4,7 @@ authors = [
   {email = "kyle@finley.sh", name = "Kyle Finley"},
 ]
 dependencies = [
-  "click (==8.1.8)",
+  "click (==8.3.0)",
   "ruamel.yaml (==0.18.15)",
 ]
 description = "YAML formatter for http://pre-commit.com."
