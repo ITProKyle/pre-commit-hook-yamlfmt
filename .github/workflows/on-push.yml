@@ -20,7 +20,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9, '3.10', 3.11, 3.12]
+        python-version: ['3.10', '3.11', '3.12']
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
@@ -46,7 +46,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9, '3.10', 3.11, 3.12]
+        python-version: ['3.10', '3.11', '3.12']
     steps:
       - uses: actions/checkout@v5
       - uses: ITProKyle/action-setup-python@v1.2.0
