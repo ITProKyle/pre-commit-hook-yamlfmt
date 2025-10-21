@@ -61,7 +61,7 @@ repos:
         exclude: .pre-commit-hooks.yaml
         args: [--mapping, '2', --offset, '2', --sequence, '4', --preserve-quotes]
   - repo: https://github.com/executablebooks/mdformat
-    rev: 1.0.0
+    rev: 0.7.22
     hooks:
       - id: mdformat
         additional_dependencies:
