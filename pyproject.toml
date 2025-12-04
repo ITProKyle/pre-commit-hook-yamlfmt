@@ -35,7 +35,7 @@ pre-commit = "^4.5.0"
 
 [tool.poetry.group.lint.dependencies]
 black = "^25.11.0"
-ruff = "^0.14.7"
+ruff = "^0.14.8"
 
 [tool.black]
 force-exclude = '''
