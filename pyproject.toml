@@ -5,7 +5,7 @@ authors = [
 ]
 dependencies = [
   "click (==8.3.1)",
-  "ruamel.yaml (==0.19.0)",
+  "ruamel.yaml (==0.19.1)",
 ]
 description = "YAML formatter for http://pre-commit.com."
 dynamic = ["version"]
