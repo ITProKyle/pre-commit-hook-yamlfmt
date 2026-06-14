@@ -2,7 +2,8 @@
 # to use specific hooks and options.
 
 default_language_version:
-  node: system
+  node: lts
+
 exclude: |
   (?x)^(
     (.*/)?package-lock\.json|

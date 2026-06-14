@@ -4,7 +4,7 @@ authors = [
   {email = "kyle@finley.sh", name = "Kyle Finley"},
 ]
 dependencies = [
-  "click (==8.3.1)",
+  "click (==8.4.1)",
   "ruamel.yaml (==0.19.1)",
 ]
 description = "YAML formatter for http://pre-commit.com."
@@ -31,11 +31,11 @@ packages = [
 version = "0.3.1"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^4.5.1"
+pre-commit = "^4.6.0"
 
 [tool.poetry.group.lint.dependencies]
 black = "^25.12.0"
-ruff = "^0.15.8"
+ruff = "^0.15.17"
 
 [tool.black]
 force-exclude = '''
